@@ -4,7 +4,7 @@ bl_info = {
     "name" : "Face Sets to Maps",
     "description" : "Converts Face Sets in Sculpt Mode into Face Maps",
     "author" : "Amos Joseph",
-    "version" : (0, 0, 1),
+    "version" : (1, 0, 0),
     "blender" : (3, 0, 0),
     "location" : "View3D",
     "warning" : "",
