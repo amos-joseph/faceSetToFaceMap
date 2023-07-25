@@ -67,6 +67,25 @@ class FS_FM_operator(Operator):
 
         return {'FINISHED'}
 
+class FS_FM_delete_operator(Operator):
+    """ Converts sculpt mode face sets to face maps """
+    bl_idname = "fctofmdelete.operator"
+    bl_label = "Delete Face Maps"
+    bl_options = {"REGISTER", "UNDO"}
+
+    @classmethod
+    def poll(cls, context):
+        return context.mode == "OBJECT"
+
+    def execute(self, context):
+
+        obj = bpy.context.active_object
+        maps = obj.face_maps
+
+        for x in maps:
+            obj.face_maps.remove(x)
+
+        return {'FINISHED'}
 
 class FS_FM_sidebar(Panel):
     """Display face set button"""
@@ -77,11 +96,13 @@ class FS_FM_sidebar(Panel):
 
     def draw(self, context):
         col = self.layout.column(align=True)
-        prop = col.operator(FS_FM_operator.bl_idname, text="Create Face Maps")
+        prop1 = col.operator(FS_FM_operator.bl_idname, text="Create Face Maps")
+        col.separator()
+        prop2 = col.operator(FS_FM_delete_operator.bl_idname, text="Delete Face Maps")
 
- 
 classes = [
     FS_FM_operator,
+    FS_FM_delete_operator,
     FS_FM_sidebar,
 ]
 
